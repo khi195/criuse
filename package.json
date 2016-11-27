@@ -1,0 +1,25 @@
+{
+  "name": "cruise",
+  "version": "1.0.0",
+  "description": "Demo api for cruise.co.uk",
+  "main": "app.js",
+  "scripts": {
+    "run": "npm install && bower install public/ ",
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khi195/nodeCruise.git"
+  },
+  "author": "kashif iqbal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khi195/nodeCruise/issues"
+  },
+  "homepage": "https://github.com/khi195/nodeCruise#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0"
+  }
+}
