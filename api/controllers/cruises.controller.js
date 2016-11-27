@@ -3,22 +3,25 @@ var cruiseData = require('../data/cruise.data.json')
 
 module.exports.cruises = function(req, res){
  
-
-if(req.query.offset){
+// query string
+// offset: starting point
+// count:  how many after start
+if(req.query && req.query.offset && req.query.count){
     var offset = parseInt(req.query.offset,10); 
-};
-
-if(req.query.count){
-    var count = parseInt(req.query.count,10); 
-};
-
-returnData = cruiseData.slice(offset, offset+count);
-
-res.
-    status(200).
-    json(returnData);
+    var count = parseInt(req.query.count,10);
+    returnData = cruiseData.slice(offset, offset+count);
+} else{
+    returnData = cruiseData;
 }
 
+    res
+        .status(200)
+        .json(returnData);
+
+}
+
+
+// find cruise by destination 
 module.exports.cruisesDestination = function(req, res){
  
 var destinationID = req.params.destination;
@@ -31,17 +34,14 @@ var destination = [];
         }
  })
  
-res.
-    status(200).
-    json(destination);
-
-}
-
-module.exports.angular = function(req, res){
-
-res
-.send(200)
-.sendFile('../../public')
-
+    if (destination.length > 0 ){
+        res
+            .status(200)
+            .json(destination);
+    }else{
+        res
+            .status(404)
+            .send("This destination does not exist"); 
+    }
 }
 
