@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html ng-app = "cruiseApp">
 
   <head>      
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style/bootwatch.min.css">
+        <script src="app.js"> </script>
     <title>Cruise.co.uk</title>
   </head>
 
 <body>
 <h1>Cruise.co.uk</h1>
-    
+<div ng-controller="mainController" >
+ <div class="container">
+    <div class="span6">
+      <div class="span6 pull-left">
+        <h2>Choose the cruise</h2>  
+      </div>
+      <div class="span6 pull-right">
+        <h4><label>Search destination: <input ng-model="searchText"></label></h4>
+      </div>
+    </div>
+ </div>
+  
+<div  class= "container"  ng-repeat="destination in destinations | filter:searchText">
+  <div  class="panel panel-default">
+    <div>
+      <h4>Destination</h4>
+      <h5> {{destination.name}}</h5>
+    </div>
+      <div>
+         <h4>Date of departure</h4>
+         <h5>{{destination.startDate |  date:'MM/dd/yyyy'}}</h5>   
+      </div>
+     <div>
+        <h4>Price</h4>
+           <h5>{{destination.offers.price | currency:"£"}}</h5>  
+     </div>
+     
+  <div>
+    <a href="#" ng-click="furtherDetails = !furtherDetails" >Further Details</a>
+  </div>
+       
+  
+    <div ng-show="furtherDetails">
+     <h5>departing from :{{destination.location.address.addressLocality}}</h5> 
+       <a href="{{destination.url}}">Book</a> 
+    </div>
+ 
+  </div>
+  </div>
+
+<div class="container">
+   <button ng-click="showMore()" type="button" class="btn btn-primary">show more cruises</button>
+</div>
+</div>
+   
 </body>
 </html>
